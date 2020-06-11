@@ -24,6 +24,7 @@ const Box: React.FC<Props> = ({ colorValue }) => {
     document.execCommand('copy');
     inputRGB.current?.blur();
     setSuccess(true);
+    setTimeout(() => setSuccess(false), 1500);
   }
 
   return (
@@ -34,19 +35,27 @@ const Box: React.FC<Props> = ({ colorValue }) => {
             onClick={copyText}
             ref={inputRGB}
             type="text"
-            value={copy}
+            value={`${copy};`}
             onChange={() => { }}
           />
-          <button onClick={copyText}><FiCopy /></button>
+          <button
+            onClick={copyText}
+          >
+            <FiCopy />
+          </button>
         </div>
         <div className="box"
           style={{
-            background: `rgb(${colorValue.red}, ${colorValue.green}, ${colorValue.blue})`
+            background: copy
           }}
         ></div>
       </div>
       {success && (
-        <p className="success">Copied!</p>
+        <p
+          className="success"
+        >
+          Copied!
+        </p>
       )}
     </>
   );

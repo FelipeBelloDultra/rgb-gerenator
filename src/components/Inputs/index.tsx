@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, Fragment } from 'react';
 
 interface Props {
   colorValue: {
@@ -10,76 +10,59 @@ interface Props {
 };
 
 const Inputs: React.FC<Props> = ({ colorValue, handleChangeColors }) => {
+  const rgbValues = [
+    {
+      value: colorValue.red,
+      reference: 'red',
+    },
+    {
+      value: colorValue.green,
+      reference: 'green',
+    },
+    {
+      value: colorValue.blue,
+      reference: 'blue',
+    },
+  ];
+
   return (
     <>
-      <div className="colors">
-        <div className="colors-content">
-          <label htmlFor="red">Red: </label>
-          <input
-            max="255"
-            min="0"
-            type="number"
-            name="red"
-            value={colorValue.red}
-            onChange={handleChangeColors}
-          />
-        </div>
-        <input
-          type="range"
-          name="red"
-          id="red"
-          min="0"
-          max="255"
-          value={colorValue.red}
-          onChange={handleChangeColors}
-        />
-      </div>
-      <div className="colors">
-        <div className="colors-content">
-          <label htmlFor="green">Green: </label>
-          <input
-            max="255"
-            min="0"
-            type="number"
-            name="green"
-            value={colorValue.green}
-            onChange={handleChangeColors}
-          />
-        </div>
-        <input
-          type="range"
-          name="green"
-          id="green"
-          min="0"
-          max="255"
-          value={colorValue.green}
-          onChange={handleChangeColors}
-        />
-      </div>
-      <div className="colors">
-        <div className="colors-content">
-          <label htmlFor="blue">Blue: </label>
-          <input
-            max="255"
-            min="0"
-            type="number"
-            name="blue"
-            value={colorValue.blue}
-            onChange={handleChangeColors}
-          />
-        </div>
-        <input
-          type="range"
-          name="blue"
-          id="blue"
-          min="0"
-          max="255"
-          value={colorValue.blue}
-          onChange={handleChangeColors}
-        />
-      </div>
+      {rgbValues.map((rgbValue, i) => (
+        <Fragment key={i}>
+          <div
+            className="colors"
+          >
+            <div
+              className="colors-content"
+            >
+              <label
+                htmlFor={rgbValue.reference}>
+                {rgbValue.reference.toUpperCase()}:
+              </label>
+              <input
+                disabled
+                max="255"
+                min="0"
+                type="number"
+                name={rgbValue.reference}
+                value={rgbValue.value}
+                onChange={handleChangeColors}
+              />
+            </div>
+            <input
+              type="range"
+              name={rgbValue.reference}
+              id={rgbValue.reference}
+              min="0"
+              max="255"
+              value={rgbValue.value}
+              onChange={handleChangeColors}
+            />
+          </div>
+        </Fragment>
+      ))}
     </>
-  )
+  );
 }
 
 export default Inputs;

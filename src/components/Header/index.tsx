@@ -7,7 +7,9 @@ interface Props {
 const Header: React.FC<Props> = ({ title }) => {
   return (
     <header>
-      <h1>{title}</h1>
+      <h1>
+        {title}
+      </h1>
     </header>
   );
 }
