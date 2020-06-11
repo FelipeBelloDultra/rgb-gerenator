@@ -1,4 +1,4 @@
-# GRB - Generator
+# RGB - Generator
 
 Desenvolvido com o intuito de tornar mais rápida a dinâmica a sua escolha de cores na hora da estilização [CSS](https://www.w3schools.com/css/)
 
