@@ -1,38 +1,109 @@
-.App {
-  text-align: center;
+:root {
+  --primary-color: #425fb1;
+  --title-color: #11204b;
+  --text-color: #53536d;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background: #F0F0F5;
+  -webkit-font-smoothing: antialiased;
+  color: var(--text-color);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body, input, button {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--title-color);
+  font-family: Ubuntu;
+}
+
+button {
+  height: 31px;
+  width: 31px;
+  background: var(--primary-color);
+  color: #FFF;
+  font-weight: bold;
+  font-size: 16px;
+  border: 0;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--title-color);
+}
+
+.container {
+  height: 100vh;
+  padding: 20px 0 0 0;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  background-image: url('./assets/photo.svg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 400px;
+  background-attachment: fixed;
+}
+
+header h1{
+  margin-bottom: 60px;
+}
+
+main {
+  padding: 5px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 1px rgb(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 100%;
+}
+
+.colors {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column;
+  padding: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.colors-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.box {
+  height: 75px;
+  width: 75px;
+  border-radius: 5px;
+  border: 1px solid rgb(216, 216, 216)
+}
+
+.box-container {
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.box-container input {
+  border: 1px solid #e0e0e0;
+  height: 30px;
+}
+
+.success {
+  text-align: center;
+  padding: 8px;
+  font-size: 20px;
+  color: rgb(40, 141, 0);
+  font-weight: bold;
 }

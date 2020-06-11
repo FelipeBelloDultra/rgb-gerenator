@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, ChangeEvent } from 'react';
+import Inputs from './components/Inputs';
+import Box from './components/Box';
+import Header from './components/Header';
+
 import './App.css';
 
-function App() {
+const App = () => {
+  const [colorValue, setColorValue] = useState({
+    red: Math.floor(Math.random()  * 256),
+    green: Math.floor(Math.random()  * 256),
+    blue: Math.floor(Math.random()  * 256)
+  });
+
+  function handleChangeColors(event: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
+
+    setColorValue({ ...colorValue, [name]: Number(value) });
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header
+        title="RGB - Generator"
+      />
+      <main>
+        <div>
+          <Inputs
+            colorValue={colorValue}
+            handleChangeColors={handleChangeColors}
+          />
+        </div>
+        <Box
+          colorValue={colorValue}
+        />
+      </main>
     </div>
   );
 }
