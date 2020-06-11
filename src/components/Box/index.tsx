@@ -31,12 +31,12 @@ const Box: React.FC<Props> = ({ colorValue }) => {
       <div className="box-container">
         <div>
           <input
+            onClick={copyText}
             ref={inputRGB}
             type="text"
             value={copy}
             onChange={() => { }}
           />
-
           <button onClick={copyText}><FiCopy /></button>
         </div>
         <div className="box"
