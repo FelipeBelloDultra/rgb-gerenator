@@ -1,18 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FiCopy } from 'react-icons/fi';
 
+import { Container, BoxSection } from './styles';
+
 interface Props {
   colorValue: {
-    red: number,
-    green: number,
-    blue: number,
+    red: number;
+    green: number;
+    blue: number;
   };
-};
+}
 
 const Box: React.FC<Props> = ({ colorValue }) => {
   const inputRGB = useRef<HTMLInputElement>(null);
 
-  const [copy, setCopy] = useState<string>(`rgba(${colorValue.red}, ${colorValue.green}, ${colorValue.blue})`);
+  const [copy, setCopy] = useState<string>(
+    `rgba(${colorValue.red}, ${colorValue.green}, ${colorValue.blue})`,
+  );
   const [success, setSuccess] = useState<boolean>(false);
 
   useEffect(() => {
@@ -29,36 +33,30 @@ const Box: React.FC<Props> = ({ colorValue }) => {
 
   return (
     <>
-      <div className="box-container">
-        <div>
+      <Container>
+        <BoxSection>
           <input
+            autoCorrect="off"
+            autoComplete="off"
             onClick={copyText}
             ref={inputRGB}
             type="text"
             value={`${copy};`}
-            onChange={() => { }}
           />
-          <button
-            onClick={copyText}
-          >
-            <FiCopy />
+          <button type="button" onClick={copyText}>
+            <FiCopy size={20} />
           </button>
-        </div>
-        <div className="box"
+        </BoxSection>
+        <div
+          className="box"
           style={{
-            background: copy
+            background: copy,
           }}
-        ></div>
-      </div>
-      {success && (
-        <p
-          className="success"
-        >
-          Copied!
-        </p>
-      )}
+        />
+      </Container>
+      {success && <p className="success">Copied!</p>}
     </>
   );
-}
+};
 
 export default Box;

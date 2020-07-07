@@ -1,13 +1,15 @@
 import React, { ChangeEvent, Fragment } from 'react';
 
+import { Container } from './styles';
+
 interface Props {
   colorValue: {
-    red: number,
-    green: number,
-    blue: number,
+    red: number;
+    green: number;
+    blue: number;
   };
   handleChangeColors: (event: ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
 const Inputs: React.FC<Props> = ({ colorValue, handleChangeColors }) => {
   const rgbValues = [
@@ -27,17 +29,12 @@ const Inputs: React.FC<Props> = ({ colorValue, handleChangeColors }) => {
 
   return (
     <>
-      {rgbValues.map((rgbValue, i) => (
-        <Fragment key={i}>
-          <div
-            className="colors"
-          >
-            <div
-              className="colors-content"
-            >
-              <label
-                htmlFor={rgbValue.reference}>
-                {rgbValue.reference.toUpperCase()}:
+      {rgbValues.map(rgbValue => (
+        <Fragment key={rgbValue.reference}>
+          <Container>
+            <section className="colors-content">
+              <label htmlFor={rgbValue.reference}>
+                {rgbValue.reference.toUpperCase()}
               </label>
               <input
                 disabled
@@ -48,7 +45,7 @@ const Inputs: React.FC<Props> = ({ colorValue, handleChangeColors }) => {
                 value={rgbValue.value}
                 onChange={handleChangeColors}
               />
-            </div>
+            </section>
             <input
               type="range"
               name={rgbValue.reference}
@@ -58,11 +55,11 @@ const Inputs: React.FC<Props> = ({ colorValue, handleChangeColors }) => {
               value={rgbValue.value}
               onChange={handleChangeColors}
             />
-          </div>
+          </Container>
         </Fragment>
       ))}
     </>
   );
-}
+};
 
 export default Inputs;
