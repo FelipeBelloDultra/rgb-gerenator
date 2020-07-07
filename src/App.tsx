@@ -3,10 +3,15 @@ import React from 'react';
 import Dashboard from './pages/Dashboard';
 import GlobalStyles from './styles/GlobalStyles';
 
+import AppProvider from './hooks';
+
 const App: React.FC = () => {
   return (
     <>
-      <Dashboard />
+      <AppProvider>
+        <Dashboard />
+      </AppProvider>
+
       <GlobalStyles />
     </>
   );

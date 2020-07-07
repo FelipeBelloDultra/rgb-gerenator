@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FiCopy } from 'react-icons/fi';
 
+import { useToast } from '../../hooks/toast';
+
 import { Container, BoxSection } from './styles';
 
 interface Props {
@@ -14,21 +16,34 @@ interface Props {
 const Box: React.FC<Props> = ({ colorValue }) => {
   const inputRGB = useRef<HTMLInputElement>(null);
 
+  const { addToast } = useToast();
+
   const [copy, setCopy] = useState<string>(
     `rgba(${colorValue.red}, ${colorValue.green}, ${colorValue.blue})`,
   );
-  const [success, setSuccess] = useState<boolean>(false);
 
   useEffect(() => {
     setCopy(`rgb(${colorValue.red}, ${colorValue.green}, ${colorValue.blue})`);
   }, [colorValue]);
 
   function copyText() {
-    inputRGB.current?.select();
-    document.execCommand('copy');
-    inputRGB.current?.blur();
-    setSuccess(true);
-    setTimeout(() => setSuccess(false), 1500);
+    try {
+      inputRGB.current?.select();
+      document.execCommand('copy');
+      inputRGB.current?.blur();
+
+      addToast({
+        type: 'success',
+        title: '😆 Sucesso',
+        description: 'RGB copiado para a sua área de transferência',
+      });
+    } catch (error) {
+      addToast({
+        type: 'error',
+        title: '😫 Opss',
+        description: 'Algo deu errado',
+      });
+    }
   }
 
   return (
@@ -54,7 +69,6 @@ const Box: React.FC<Props> = ({ colorValue }) => {
           }}
         />
       </Container>
-      {success && <p className="success">Copied!</p>}
     </>
   );
 };

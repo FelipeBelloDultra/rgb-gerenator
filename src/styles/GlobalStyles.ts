@@ -24,6 +24,11 @@ const GlobalStyle = createGlobalStyle`
     font-weight: bold;
   }
 
+  button {
+    border: 0;
+    cursor: pointer;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     color: var(--title-color);
     font-family: Ubuntu;
