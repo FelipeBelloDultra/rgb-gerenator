@@ -1,36 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { FiCopy } from 'react-icons/fi';
 
 import { useToast } from '../../hooks/toast';
+import { useColors } from '../../hooks/colors';
 
 import { Container, BoxSection } from './styles';
 
-interface Props {
-  colorValue: {
-    red: number;
-    green: number;
-    blue: number;
-  };
-}
-
-const Box: React.FC<Props> = ({ colorValue }) => {
+const Box: React.FC = () => {
   const inputRGB = useRef<HTMLInputElement>(null);
 
   const { addToast } = useToast();
+  const { rgbConstant } = useColors();
 
-  const [copy, setCopy] = useState<string>(
-    `rgba(${colorValue.red}, ${colorValue.green}, ${colorValue.blue})`,
-  );
-
-  useEffect(() => {
-    setCopy(`rgb(${colorValue.red}, ${colorValue.green}, ${colorValue.blue})`);
-  }, [colorValue]);
-
-  function copyText() {
+  const handleCopyText = useCallback(() => {
     try {
       inputRGB.current?.select();
       document.execCommand('copy');
-      inputRGB.current?.blur();
 
       addToast({
         type: 'success',
@@ -44,7 +29,7 @@ const Box: React.FC<Props> = ({ colorValue }) => {
         description: 'Algo deu errado',
       });
     }
-  }
+  }, [addToast]);
 
   return (
     <>
@@ -53,19 +38,20 @@ const Box: React.FC<Props> = ({ colorValue }) => {
           <input
             autoCorrect="off"
             autoComplete="off"
-            onClick={copyText}
+            onClick={handleCopyText}
             ref={inputRGB}
             type="text"
-            value={`${copy};`}
+            value={`${rgbConstant};`}
+            readOnly
           />
-          <button type="button" onClick={copyText}>
+          <button type="button" onClick={handleCopyText}>
             <FiCopy size={20} />
           </button>
         </BoxSection>
         <div
           className="box"
           style={{
-            background: copy,
+            background: rgbConstant,
           }}
         />
       </Container>

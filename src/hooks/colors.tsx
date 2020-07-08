@@ -1,4 +1,11 @@
-import React, { createContext, useState, useContext, useCallback } from 'react';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useCallback,
+  useEffect,
+  ChangeEvent,
+} from 'react';
 
 interface Colors {
   red: number;
@@ -7,8 +14,9 @@ interface Colors {
 }
 
 interface ColorContextData {
-  colorValue: object;
-  setColors(colors: Colors): void;
+  colorValue: Colors;
+  rgbConstant: string;
+  setColors(event: ChangeEvent<HTMLInputElement>): void;
 }
 
 const ColorContext = createContext<ColorContextData>({} as ColorContextData);
@@ -19,13 +27,27 @@ const ColorProvider: React.FC = ({ children }) => {
     green: Math.floor(Math.random() * 256),
     blue: Math.floor(Math.random() * 256),
   });
+  const [rgb, setRgb] = useState<string>(
+    `rgb(${data.red}, ${data.green}, ${data.blue})`,
+  );
 
-  const setColors = useCallback(({ red, green, blue }) => {
-    setData({ red, green, blue });
-  }, []);
+  useEffect(() => {
+    setRgb(`rgb(${data.red}, ${data.green}, ${data.blue})`);
+  }, [data]);
+
+  const setColors = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.target;
+
+      setData({ ...data, [name]: Number(value) });
+    },
+    [data],
+  );
 
   return (
-    <ColorContext.Provider value={{ colorValue: data, setColors }}>
+    <ColorContext.Provider
+      value={{ colorValue: data, setColors, rgbConstant: rgb }}
+    >
       {children}
     </ColorContext.Provider>
   );

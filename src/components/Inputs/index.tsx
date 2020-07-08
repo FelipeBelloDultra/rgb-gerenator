@@ -1,64 +1,47 @@
-import React, { ChangeEvent, Fragment } from 'react';
+import React, { ChangeEvent, useCallback } from 'react';
+
+import { useColors } from '../../hooks/colors';
 
 import { Container } from './styles';
 
 interface Props {
-  colorValue: {
-    red: number;
-    green: number;
-    blue: number;
-  };
-  handleChangeColors: (event: ChangeEvent<HTMLInputElement>) => void;
+  reference: string;
+  value: number;
 }
 
-const Inputs: React.FC<Props> = ({ colorValue, handleChangeColors }) => {
-  const rgbValues = [
-    {
-      value: colorValue.red,
-      reference: 'red',
+const Inputs: React.FC<Props> = ({ reference, value }) => {
+  const { setColors } = useColors();
+
+  const handleChangeColor = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setColors(event);
     },
-    {
-      value: colorValue.green,
-      reference: 'green',
-    },
-    {
-      value: colorValue.blue,
-      reference: 'blue',
-    },
-  ];
+    [setColors],
+  );
 
   return (
-    <>
-      {rgbValues.map(rgbValue => (
-        <Fragment key={rgbValue.reference}>
-          <Container>
-            <section className="colors-content">
-              <label htmlFor={rgbValue.reference}>
-                {rgbValue.reference.toUpperCase()}
-              </label>
-              <input
-                disabled
-                max="255"
-                min="0"
-                type="number"
-                name={rgbValue.reference}
-                value={rgbValue.value}
-                onChange={handleChangeColors}
-              />
-            </section>
-            <input
-              type="range"
-              name={rgbValue.reference}
-              id={rgbValue.reference}
-              min="0"
-              max="255"
-              value={rgbValue.value}
-              onChange={handleChangeColors}
-            />
-          </Container>
-        </Fragment>
-      ))}
-    </>
+    <Container>
+      <section className="colors-content">
+        <label htmlFor={reference}>{reference.toUpperCase()}</label>
+        <input
+          disabled
+          max="255"
+          min="0"
+          type="number"
+          name={reference}
+          value={value}
+        />
+      </section>
+      <input
+        type="range"
+        name={reference}
+        id={reference}
+        min="0"
+        max="255"
+        value={value}
+        onChange={handleChangeColor}
+      />
+    </Container>
   );
 };
 

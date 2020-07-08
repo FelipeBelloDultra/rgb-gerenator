@@ -6,12 +6,10 @@ interface Props {
   title: string;
 }
 
-const Header: React.FC<Props> = ({ title }) => {
-  return (
-    <Container>
-      <h1>{title}</h1>
-    </Container>
-  );
-};
+const Header: React.FC<Props> = ({ title }) => (
+  <Container>
+    <h1>{title}</h1>
+  </Container>
+);
 
 export default Header;

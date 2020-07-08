@@ -1,45 +1,25 @@
-import React, { useState, ChangeEvent, useCallback } from 'react';
+import React from 'react';
 import Inputs from '../../components/Inputs';
 import Box from '../../components/Box';
 import Header from '../../components/Header';
 
+import { useColors } from '../../hooks/colors';
+
 import { Container } from './styles';
 
 const Dashboard: React.FC = () => {
-  const [colorValue, setColorValue] = useState({
-    red: Math.floor(Math.random() * 256),
-    green: Math.floor(Math.random() * 256),
-    blue: Math.floor(Math.random() * 256),
-  });
-
-  const handleChangeColors = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.target;
-
-      setColorValue({ ...colorValue, [name]: Number(value) });
-    },
-    [colorValue],
-  );
+  const { colorValue } = useColors();
 
   return (
     <Container>
       <Header title="RGB - Generator" />
       <main>
         <div>
-          <Inputs
-            colorValue={colorValue}
-            handleChangeColors={handleChangeColors}
-          />
-          <Inputs
-            colorValue={colorValue}
-            handleChangeColors={handleChangeColors}
-          />
-          <Inputs
-            colorValue={colorValue}
-            handleChangeColors={handleChangeColors}
-          />
+          <Inputs reference="red" value={colorValue.red} />
+          <Inputs reference="green" value={colorValue.green} />
+          <Inputs reference="blue" value={colorValue.blue} />
         </div>
-        <Box colorValue={colorValue} />
+        <Box />
       </main>
     </Container>
   );
