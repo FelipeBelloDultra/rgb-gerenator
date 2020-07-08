@@ -30,6 +30,14 @@ const Dashboard: React.FC = () => {
             colorValue={colorValue}
             handleChangeColors={handleChangeColors}
           />
+          <Inputs
+            colorValue={colorValue}
+            handleChangeColors={handleChangeColors}
+          />
+          <Inputs
+            colorValue={colorValue}
+            handleChangeColors={handleChangeColors}
+          />
         </div>
         <Box colorValue={colorValue} />
       </main>

@@ -1,9 +1,12 @@
 import React from 'react';
 
 import { ToastProvider } from './toast';
+import { ColorProvider } from './colors';
 
 const AppProvider: React.FC = ({ children }) => (
-  <ToastProvider>{children}</ToastProvider>
+  <ColorProvider>
+    <ToastProvider>{children}</ToastProvider>
+  </ColorProvider>
 );
 
 export default AppProvider;
