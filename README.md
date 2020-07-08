@@ -1,6 +1,6 @@
 # RGB - Generator
 
-Desenvolvido com o intuito de tornar mais rápida a dinâmica a sua escolha de cores na hora da estilização [CSS](https://www.w3schools.com/css/)
+Desenvolvido com fins didáticos e tornar mais rápida a dinâmica a sua escolha de cores na hora da estilização [CSS](https://www.w3schools.com/css/)
 
 ![alt text](./src/assets/screen.png)
 
@@ -14,5 +14,7 @@ Com as dependências já baixadas, basta iniciar o servidor. Uso o comando `yarn
 
 1. [ReactJS](https://reactjs.org/)
 2. [Typescript](https://www.typescriptlang.org/)
-
-Utilizei também o pacote de ícones [react-icons](https://react-icons.github.io/react-icons/)
+3. [Styled Components](https://styled-components.com/)
+4. [React Spring](https://www.react-spring.io/)
+5. [Polished](https://polished.js.org/)
+6. [React Icons](https://react-icons.github.io/react-icons/)
