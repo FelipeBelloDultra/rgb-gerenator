@@ -18,3 +18,7 @@ Com as dependências já baixadas, basta iniciar o servidor. Uso o comando `yarn
 4. [React Spring](https://www.react-spring.io/)
 5. [Polished](https://polished.js.org/)
 6. [React Icons](https://react-icons.github.io/react-icons/)
+
+### Aplicação funcionando
+
+[RGB - Generator](https://rgb-generator.netlify.app/)
